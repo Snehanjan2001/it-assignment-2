@@ -29,7 +29,7 @@ router.post("/register", async(req, res) => {
         });
 
         const user = await newUser.save();
-        res.status(200).json(user);
+        res.status(200).redirect("/dashboard/" + user.username)
 
     } catch (error) {
         console.log(error);

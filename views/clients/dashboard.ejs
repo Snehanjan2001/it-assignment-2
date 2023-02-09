@@ -18,11 +18,17 @@
     </div>
     <form action="/dashboard/<%= locals.user %>" method="post" enctype="multipart/form-data">
         <input class="form-control form-control-sm" id="formFileSm" type="file" name="file">
-        <input type="text" name="filename">
+
         <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <form action="/upload/<%= locals.user %>">
+        <button type="submit" id="submit-button" value="<%= locals.user %>">Go to uploads Page</button>
     </form>
 
 
+    <div id="view-List"></div>
+
+    <script src="frontend.js"></script>
 
 
 

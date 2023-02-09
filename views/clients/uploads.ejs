@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uploads</title>
+</head>
+
+<body>
+    <h1>uploads page of
+        <%= locals.user %>
+    </h1>
+    <% files.forEach(function(file){ %>
+        <a href="/uploads/<%= file.filename %>" target="_blank">
+            <%= file.filename %>
+                <img src="/uploads/<%= file.filename %>" width="100px">
+                </p>
+
+                <% }); %>
+
+
+</body>
+
+</html>

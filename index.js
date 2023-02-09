@@ -6,10 +6,11 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const req = require("express/lib/request")
 const multer = require('multer')
-
+const cors = require("cors")
 const authRoute = require("./routes/auth")
 const dashboardRoute = require("./routes/dashboard")
-const { urlencoded } = require("express")
+const uploaded_Route = require("./routes/upload-docs")
+
 
 
 dotenv.config();
@@ -33,6 +34,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+app.use(express.static("public"))
 
 
 
@@ -44,6 +47,7 @@ app.get("/", (req, res) => {
 })
 app.use("/auth", authRoute)
 app.use("/dashboard", dashboardRoute)
+app.use("/upload", uploaded_Route)
 app.set("view-engine", "ejs")
 
 

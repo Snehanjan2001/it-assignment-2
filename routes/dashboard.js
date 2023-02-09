@@ -9,16 +9,20 @@ const File = require("../models/File")
 //setting up the multer
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads')
+        cb(null, 'public/uploads')
     },
     filename: function(req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix)
+        const extension = file.originalname.split(".")[1]
+        cb(null, uniqueSuffix + "." + extension)
     }
 })
 
 const upload = multer({ storage: storage })
 
+
+
+//The dashboard routes
 router.get("/", (req, res) => {
     res.send("This is the dashboard")
 })
@@ -29,9 +33,8 @@ router
     })
     .post(upload.single('file'), (req, res) => {
         const userName = req.params.username
-        const filename = req.body.filename
         const tempFileModel = new File({
-            filename: filename
+            filename: req.file.filename
         })
 
 
@@ -40,11 +43,12 @@ router
             if (err) {
                 console.log("ERROR")
             } else {
-                console.log(filename)
+
+                console.log(req.file)
             }
         })
         console.log("Files uploaded")
-
+        res.json(req.body)
     })
 
 
